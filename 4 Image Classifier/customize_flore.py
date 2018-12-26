@@ -20,7 +20,9 @@ from collections import OrderedDict
 import argparse
 
 
-# In[ ]:
+nThreads = 4
+batch_size = 8
+use_gpu = torch.cuda.is_available()
 
 
 def load_data(where  = "./flowers" ):
@@ -168,6 +170,14 @@ def load_checkpoint(path='checkpoint.pth'):
                           ]))
     
     model.classifier = classifier  
+    
+    if args.gpu:
+        if use_gpu:
+            model = model.cuda()
+            print ("Using GPU: "+ str(use_gpu))
+        else:
+            print("Using CPU since GPU is not available")
+
     model.load_state_dict(checkpoint['state_dict'])
     return model
 

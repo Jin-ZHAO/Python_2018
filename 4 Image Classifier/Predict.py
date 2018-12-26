@@ -13,6 +13,8 @@ parser.add_argument('checkpoint', help='the model that to be used')
 parser.add_argument('--top_k', type=int, default=3)
 parser.add_argument('--category_names',dest='category_names', action='store', default='cat_to_name.json')
 parser.add_argument('--gpu', action='store_true',dest='gpu')
+torch.cuda.is_available()
+
 pa = parser.parse_args()
 
 path_image = pa.input_img
